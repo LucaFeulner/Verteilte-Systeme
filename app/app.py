@@ -3,7 +3,8 @@ import requests
 import os
 from dotenv import load_dotenv
 
-load_dotenv()  # Umgebungsvariablen aus der .env-Datei laden
+#Umgebungsvariablen werden aus .env geladen
+load_dotenv()  
 
 app = Flask(__name__)
 
@@ -13,7 +14,7 @@ COUCHDB_URL = os.getenv("COUCHDB_URL")
 def get_data():
     month = request.args.get('month', type=int)
     day = request.args.get('day', type=int)
-    # CouchDB erwartet den Monat im Bereich 0-11
+    #Da in Java es bei 0 startet
     month -= 1
     query = {
         "selector": {
@@ -25,7 +26,7 @@ def get_data():
     response = requests.post(f"{COUCHDB_URL}/_find", json=query)
     if response.status_code == 200:
         data = response.json()['docs']
-        # Geburtstag in deutscher Schreibweise umwandeln
+        
         for entry in data:
             entry['born'] = entry['born'].replace('-', '.')
         return jsonify(data), 200
