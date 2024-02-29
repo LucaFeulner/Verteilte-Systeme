@@ -35,7 +35,7 @@ def get_data():
     }
 
     try:
-        # POST-Anfrage an CouchDB mit Timeout
+        # POST-Anfrage an CouchDB mit Timeout (2 sec gemäß Aufgabenstellung)
         response = requests.post(f"{COUCHDB_URL}/{COUCHDB_DB}/_find", json=query, auth=auth, timeout=2)
 
 

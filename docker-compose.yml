@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  couchdb:
+    build: ./birthday-couchdb/Containerimage
+    volumes:
+      - couchdb_data:/opt/couchdb/data
+    environment:
+      COUCHDB_USER: admin
+      COUCHDB_PASSWORD: student
+    networks:
+      - mein-netzwerk
+
+  meine-flask-app:
+    build: .
+    depends_on:
+      - couchdb
+    ports:
+      - "8001:8001"
+    environment:
+      COUCHDB_URL: http://couchdb:5984
+      COUCHDB_DB: birthday_db
+      COUCHDB_USER: admin
+      COUCHDB_PASSWORD: student
+      FLASK_RUN_PORT: 8001
+    networks:
+      - mein-netzwerk
+
+networks:
+  mein-netzwerk:
+
+volumes:
+  couchdb_data:
