@@ -44,10 +44,13 @@ def get_data():
             data = response.json().get('docs', [])
             if data:
                 # Formatieren der Antwort gemäß Aufgabenstellung
-                formatted_data = [{"name": f"{d['first']} {d['name']}", "profession": d["prof"], "born": f"{d['day']}.{d['month']}.{d['year']}"} for d in data]
+                formatted_data=[]
+                for d in data:
+                    correct_month = int(d.get("month", ""))+1
+                    formatted_data.append({"name": f"{d['first']} {d['name']}", "profession": d["prof"], "born": f"{d['day']}.{str(correct_month)}.{d['year']}"})
                 return jsonify(formatted_data), 200
             else:
-                return jsonify([]), 204
+                return jsonify({'error': 'No Content'}), 204
         elif response.status_code == 401:
             # Ungültige Anmeldeinformationen
             return jsonify({'error': 'Invalid credentials'}), 401
@@ -58,7 +61,7 @@ def get_data():
         return jsonify({'error': 'The request timed out'}), 408
     except Exception as e:
         # Allgemeine Fehler
-        return jsonify({'error': 'An internal error occurred'}), 500
+        return jsonify({'detail': 'Connection problem, service not available'}), 500
 
 
 
