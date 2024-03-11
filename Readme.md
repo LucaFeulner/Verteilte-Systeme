@@ -75,9 +75,15 @@ curl "http://localhost:8001/api/v1/get_data?month=12&day=28"
 eval $(minikube docker-env)
 
 docker build -t micronetes:latest .
+docker build -t dhbw-couch:1 ./birthday-couchdb/ContainerImage
+
 
 kubectl apply -f kubernetes/flask_app_deployment.yaml
 kubectl apply -f kubernetes/flask_app_service.yaml
 kubectl apply -f kubernetes/couchdb_service.yaml   
 kubectl apply -f kubernetes/couchdb_deployment.yaml
+
+kubectl get deployments
+kubectl get pods
+
 

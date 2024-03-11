@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: couchdb
-        image: haraldu/dhbw-couch:1
+        image: dhbw-couch:1
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5984
