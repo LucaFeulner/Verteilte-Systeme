@@ -13,8 +13,8 @@ spec:
         app: flask-app
     spec:
       containers:
-      - name: flask-app-container
-        image: micronetes:latest
+      - name: flask-app
+        image: micronetes:1
         ports:
         - containerPort: 8001
         env:

@@ -71,19 +71,52 @@ curl "http://localhost:8001/api/v1/get_data?month=12&day=28"
 
 
 ## Teil 3
-
+Starte Minikube mit diesem Befehl
+```
+minikube start
+````
+Mit diesem Befehl kann der Docker-Client, auf den Docker-Daemon innerhalb des Minikube-Clusters zuzugreifen
+```
 eval $(minikube docker-env)
+```
 
-docker build -t micronetes:latest .
+Führe anschließend die folgenden Befehle aus, um die Images zu bauen. 
+```
+docker build -t micronetes:1 .
 docker build -t dhbw-couch:1 ./birthday-couchdb/ContainerImage
+```
 
+Da der befehl davor ausgeführt wurde, sollten die Images direkt im Minikube Docker-Deamon vorhanden sein.
+Um da zu überprüfen, führe folgenden Befehl aus:
+```
+minikube ssh 'docker images'
+```
 
+Falls die Images nicht enthalten sind, mit folgendem Befehl hochladen
+````
+minikube image load <Name des Images>:<tag>
+```
+
+Wurden nun alle Befehle erforgreich ausgeführt, führe die nächsten Befehle aus:
+```
 kubectl apply -f kubernetes/flask_app_deployment.yaml
 kubectl apply -f kubernetes/flask_app_service.yaml
 kubectl apply -f kubernetes/couchdb_service.yaml   
 kubectl apply -f kubernetes/couchdb_deployment.yaml
+````
 
+Nun überprüfe mit folgenden Befehlen ob alles korrekt ausgeführt wurde:
+```
 kubectl get deployments
 kubectl get pods
+````
+
+Sollten Fehler bei den Pods auftreten, mit folgendem Befehl einen Überblick beschaffen:
+```
+kubectl logs <Podname>
+```
+
+
+
 
 
