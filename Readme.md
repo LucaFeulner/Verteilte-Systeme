@@ -72,3 +72,12 @@ curl "http://localhost:8001/api/v1/get_data?month=12&day=28"
 
 ## Teil 3
 
+eval $(minikube docker-env)
+
+docker build -t micronetes:latest .
+
+kubectl apply -f kubernetes/flask_app_deployment.yaml
+kubectl apply -f kubernetes/flask_app_service.yaml
+kubectl apply -f kubernetes/couchdb_service.yaml   
+kubectl apply -f kubernetes/couchdb_deployment.yaml
+

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-app-deployment
+  name: flask-app
 spec:
   replicas: 1
   selector:
@@ -13,13 +13,13 @@ spec:
         app: flask-app
     spec:
       containers:
-      - name: flask-app
-        image: meine-flask-app:latest
+      - name: flask-app-container
+        image: micronetes:latest
         ports:
-        - containerPort: 8001  # Ersetzen Sie dies durch den Port, den Ihre App verwendet
+        - containerPort: 8001
         env:
           - name: COUCHDB_URL
-            value: "http://localhost:5984/"  # Passen Sie diesen Wert an Ihre Konfiguration an
+            value: "http://couchdb:5984"
         readinessProbe:
           httpGet:
             path: /health
