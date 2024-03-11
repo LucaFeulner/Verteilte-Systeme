@@ -62,7 +62,6 @@ Um das ganze in einem Container laufen zu lassen, führe folgenden Befehl im Ver
 docker-compose up
 ```
 
-```
 
 Nun kann der Service extern z.B. über das Terminal mit folgendem Befehl aufgerufen werden:
 
@@ -72,3 +71,4 @@ curl "http://localhost:8001/api/v1/get_data?month=12&day=28"
 
 
 ## Teil 3
+

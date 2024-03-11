@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+      - name: flask-app
+        image: meine-flask-app:latest
+        ports:
+        - containerPort: 8001  # Ersetzen Sie dies durch den Port, den Ihre App verwendet
+        env:
+          - name: COUCHDB_URL
+            value: "http://localhost:5984/"  # Passen Sie diesen Wert an Ihre Konfiguration an
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8001
+          initialDelaySeconds: 10
+          periodSeconds: 5
