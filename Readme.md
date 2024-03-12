@@ -114,6 +114,12 @@ kubectl get pods
 
 kubectl port-forward <podnamen> 8001:8001
 
+Mit diesem befehl kann extern darauf zugegriffen werden:
+```
+curl -X GET 'http://localhost:8001/api/v1/get_data?month=12&day=28'
+```
+
+
 Sollten Fehler bei den Pods auftreten, mit folgendem Befehl einen Überblick beschaffen:
 ```
 kubectl logs <Podname>
