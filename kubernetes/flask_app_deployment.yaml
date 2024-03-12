@@ -18,6 +18,16 @@ spec:
         ports:
         - containerPort: 8001
         env:
+          - name: COUCHDB_USER
+            valueFrom:
+              secretKeyRef:
+                name: couchdb-secret
+                key: couchdbuser
+          - name: COUCHDB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: couchdb-secret
+                key: couchdbpassword
           - name: COUCHDB_URL
             value: "http://couchdb:5984"
         readinessProbe:

@@ -103,6 +103,7 @@ kubectl apply -f kubernetes/flask_app_deployment.yaml
 kubectl apply -f kubernetes/flask_app_service.yaml
 kubectl apply -f kubernetes/couchdb_service.yaml   
 kubectl apply -f kubernetes/couchdb_deployment.yaml
+kubectl apply -f kubernetes/secret.yaml
 ````
 
 Nun überprüfe mit folgenden Befehlen ob alles korrekt ausgeführt wurde:
@@ -110,6 +111,8 @@ Nun überprüfe mit folgenden Befehlen ob alles korrekt ausgeführt wurde:
 kubectl get deployments
 kubectl get pods
 ````
+
+kubectl port-forward <podnamen> 8001:8001
 
 Sollten Fehler bei den Pods auftreten, mit folgendem Befehl einen Überblick beschaffen:
 ```

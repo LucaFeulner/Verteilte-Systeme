@@ -21,6 +21,7 @@ auth = (COUCHDB_USER, COUCHDB_PASSWORD)
 def get_data():
     month = request.args.get('month')
     day = request.args.get('day')
+    
 
     # Anpassung des Monats für die CouchDB-Anfrage (von 1-basiert auf 0-basiert)
     month_adjusted = str(int(month) - 1)
@@ -36,7 +37,7 @@ def get_data():
 
     try:
         # POST-Anfrage an CouchDB mit Timeout (2 sec gemäß Aufgabenstellung)
-        response = requests.post(f"{COUCHDB_URL}/{COUCHDB_DB}/_find", json=query, auth=auth, timeout=2)
+        response = requests.post(f"{COUCHDB_URL}/{COUCHDB_DB}/_find", json=query, auth=(COUCHDB_USER, COUCHDB_PASSWORD), timeout=2)
 
 
 
