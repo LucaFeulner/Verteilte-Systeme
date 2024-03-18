@@ -6,8 +6,8 @@ services:
     volumes:
       - couchdb_data:/opt/couchdb/data
     environment:
-      COUCHDB_USER: admin
-      COUCHDB_PASSWORD: student
+      COUCHDB_USER: ${COUCHDB_USER}
+      COUCHDB_PASSWORD: ${COUCHDB_PASSWORD}
     networks:
       - mein-netzwerk
 
@@ -20,8 +20,8 @@ services:
     environment:
       COUCHDB_URL: http://couchdb:5984
       COUCHDB_DB: birthday_db
-      COUCHDB_USER: admin
-      COUCHDB_PASSWORD: student
+      COUCHDB_USER: ${COUCHDB_USER}
+      COUCHDB_PASSWORD: ${COUCHDB_PASSWORD}
       FLASK_RUN_PORT: 8001
     networks:
       - mein-netzwerk
